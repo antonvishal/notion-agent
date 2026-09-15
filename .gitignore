@@ -1,10 +1,13 @@
 node_modules
 .env*
+!.env.example
 .eve
 .vercel
 .next
 .output
+.cache
 .nitro
 dist
 .DS_Store
 *.tsbuildinfo
+agent/assets/stagehand-extension.zip

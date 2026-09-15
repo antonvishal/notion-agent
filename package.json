@@ -1,23 +1,44 @@
 {
   "name": "notion-agent",
   "version": "0.0.0",
+  "private": true,
+  "description": "Run allowlisted, read-only browser tasks from Notion comments with eve and Stagehand.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonVishal/notion-agent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AntonVishal/notion-agent/issues"
+  },
+  "homepage": "https://github.com/AntonVishal/notion-agent#readme",
   "type": "module",
   "imports": {
     "#*": "./agent/*",
     "#evals/*": "./evals/*"
   },
   "scripts": {
-    "build": "eve build",
-    "deploy": "eve deploy",
-    "dev": "eve dev",
-    "eval": "eve eval",
-    "start": "eve start",
-    "typecheck": "tsc"
+    "prepare:stagehand": "bun scripts/prepare-stagehand-extension.ts",
+    "build": "bun run prepare:stagehand && bunx eve build",
+    "deploy": "bunx eve deploy",
+    "dev": "bunx eve dev",
+    "eval": "bunx eve eval",
+    "start": "bunx eve start",
+    "typecheck": "bun run prepare:stagehand && tsc"
   },
   "dependencies": {
+    "@browserbasehq/sdk": "2.20.0",
+    "@browserbasehq/stagehand": "4.1.0",
+    "@chat-adapter/notion": "4.40.0",
+    "@chat-adapter/state-memory": "4.40.0",
+    "@chat-adapter/state-redis": "4.40.0",
+    "@notionhq/client": "5.26.0",
+    "@vercel/blob": "^2.8.0",
     "@vercel/connect": "1.0.0",
     "ai": "^7.0.93",
+    "chat": "4.40.0",
     "eve": "^0.55.0",
+    "fflate": "^0.8.3",
     "zod": "4.5.4"
   },
   "devDependencies": {
@@ -26,6 +47,6 @@
   },
   "engines": {
     "node": "24.x"
-  }
-
+  },
+  "packageManager": "bun@1.3.14"
 }
